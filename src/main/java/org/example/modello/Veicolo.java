@@ -1,8 +1,30 @@
 package org.example.modello;
 
 public abstract class Veicolo {
+    public String getCodice() {
+        return codice;
+    }
+
     String codice;
+
+    public Integer getLivelloBatteria() {
+        return livelloBatteria;
+    }
+
+    public void setLivelloBatteria(Integer livelloBatteria) {
+        this.livelloBatteria = livelloBatteria;
+    }
+
     Integer livelloBatteria;
+
+    public Stato getStato() {
+        return stato;
+    }
+
+    public void setStato(Stato stato) {
+        this.stato = stato;
+    }
+
     Stato stato;
     Double consumo;
     Double tariffa;
@@ -15,8 +37,8 @@ public abstract class Veicolo {
         this.tariffa = tariffa;
     }
 
-    abstract double calcolaCosto(int minuti);
+    public abstract double calcolaCosto(int minuti);
 
-    abstract double consumoBatteriaPerMinuto();
+    public abstract double consumoBatteriaPerMinuto();
 }
 

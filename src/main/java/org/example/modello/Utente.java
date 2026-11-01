@@ -11,6 +11,15 @@ public class Utente {
     String nome;
     String email;
     String codiceFiscale;
+
+    public Double getCredito() {
+        return credito;
+    }
+
+    public void setCredito(Double credito) {
+        this.credito = credito;
+    }
+
     Double credito;
 
     public Utente(String id, String nome, String email, String codiceFiscale, Double credito) throws RossiGoException {
@@ -22,16 +31,13 @@ public class Utente {
 
         EmailValidator validator = EmailValidator.getInstance();
         if(!validator.isValid(email)){
-            throw new CodiceFiscaleNonValidoException("Il codice fiscale: "+ codiceFiscale + " non è valido.", codiceFiscale);
+            throw new EmailNonValidaException("La mail: " + email + " non è valida.", email);
         }
         this.email = email;
         if(!CodiceFiscale.isFormatValid(codiceFiscale)) {
-            throw new EmailNonValidaException("La mail: " + email + " non è valida.", email);
+            throw new CodiceFiscaleNonValidoException("Il codice fiscale: "+ codiceFiscale + " non è valido.", codiceFiscale);
         }
         this.codiceFiscale = codiceFiscale;
-        if(credito < 1){
-            throw new CreditoInsufficienteException("Il credito è insufficente.", credito);
-        }
         this.credito = credito;
     }
 

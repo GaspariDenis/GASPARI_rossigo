@@ -10,12 +10,12 @@ public class Bici  extends Veicolo{
     }
 
     @Override
-    double calcolaCosto(int minuti) {
+    public double calcolaCosto(int minuti) {
         return tariffa * minuti;
     }
 
     @Override
-    double consumoBatteriaPerMinuto() {
+    public double consumoBatteriaPerMinuto() {
         return consumo;
     }
 
