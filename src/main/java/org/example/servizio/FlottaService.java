@@ -11,12 +11,20 @@ import java.util.Objects;
 public class FlottaService {
     ArrayList<Veicolo> listaVeicoli;
     ArrayList<Utente> listaUtenti;
+    private Database db;
 
     private static FlottaService instance;
 
     private FlottaService() {
-        listaVeicoli = new ArrayList<>();
-        listaUtenti = new ArrayList<>();
+
+        try{
+            db = Database.getInstance();
+            listaVeicoli = db.getAllVeicoli();
+            listaUtenti = db.getAllUtenti();
+        }catch (Exception e){
+            listaVeicoli = new ArrayList<>();
+            listaUtenti = new ArrayList<>();
+        }
     }
 
     public static FlottaService getInstance(){
@@ -25,11 +33,18 @@ public class FlottaService {
         return instance;
     }
 
-    public void registraVeicolo(Veicolo veicolo){
+    public void registraVeicolo(Veicolo veicolo) {
+        try {
+            db.addVeicolo(veicolo);
+        }catch (Exception _){
+        }
         listaVeicoli.add(veicolo);
     }
 
     public void registraUtente(Utente u){
+        try {
+            db.addUtente(u);
+        }catch (Exception _){}
         listaUtenti.add(u);
     }
 
@@ -62,6 +77,8 @@ public class FlottaService {
             throw new CreditoInsufficienteException("Il credito dell'utente :" + idUtente + " è insufficente.", u.getCredito());
         }
         v.setStato(Stato.IN_USO);
+
+        updateVeicolo(v);
     }
 
     public void terminaNoleggio(String codice, String idUtente, int minutiUsati) throws RossiGoException {
@@ -90,6 +107,8 @@ public class FlottaService {
         }else{
             v.setStato(Stato.LIBERO);
         }
+        updateUtente(u);
+        updateVeicolo(v);
     }
 
     public void mettiInRicarica(String codice) throws VeicoloNonTrovatoException {
@@ -109,6 +128,7 @@ public class FlottaService {
             v.setLivelloBatteria(100);
             v.setStato(Stato.LIBERO);
         });
+        updateVeicolo(v);
     }
 
     private Utente userExist(String id) {
@@ -127,5 +147,17 @@ public class FlottaService {
             }
         }
         return null;
+    }
+
+    private void updateVeicolo(Veicolo v) {
+        try{
+            db.updateVeicolo(v);
+        }catch (Exception _){
+        }
+    }
+    private void updateUtente(Utente u) {
+        try {
+            db.updateUtente(u);
+        }catch (Exception _){}
     }
 }

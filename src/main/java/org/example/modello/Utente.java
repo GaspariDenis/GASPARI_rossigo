@@ -8,6 +8,19 @@ import org.example.eccezioni.*;
 //id, nome, email, codice fiscale, credito in euro
 public class Utente {
     String id;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCodiceFiscale() {
+        return codiceFiscale;
+    }
+
     String nome;
     String email;
     String codiceFiscale;
