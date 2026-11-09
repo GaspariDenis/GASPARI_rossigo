@@ -2,6 +2,10 @@ package org.example.modello;
 
 public class Bici  extends Veicolo{
 
+    public Integer getMarce() {
+        return marce;
+    }
+
     Integer marce;
 
     public Bici(String codice, Integer livelloBatteria, Stato stato, Double consumo, Integer marce, Double tariffa) {

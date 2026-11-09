@@ -26,6 +26,15 @@ public abstract class Veicolo {
     }
 
     Stato stato;
+
+    public Double getConsumo() {
+        return consumo;
+    }
+
+    public Double getTariffa() {
+        return tariffa;
+    }
+
     Double consumo;
     Double tariffa;
 

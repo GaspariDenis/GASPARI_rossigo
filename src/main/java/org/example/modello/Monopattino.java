@@ -2,6 +2,10 @@ package org.example.modello;
 
 public class Monopattino extends Veicolo {
 
+    public Double getVelocitaMassima() {
+        return velocitaMassima;
+    }
+
     Double velocitaMassima;
 
     public Monopattino(String codice, Integer livelloBatteria, Stato stato, Double consumo, Double velocitaMassima) {
